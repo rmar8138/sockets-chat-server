@@ -9,6 +9,11 @@ mongoose.connect(`mongodb://localhost/sockets-chat`, {
   useUnifiedTopology: true
 });
 
+// Set promise library
+
+mongoose.Promise = global.Promise;
+mongoose.connection.on("error", err => console.log(err));
+
 app.use(routes);
 
 module.exports = app;
