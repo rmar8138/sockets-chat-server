@@ -7,7 +7,11 @@ const MessageSchema = new Schema({
     required: true,
     trim: true
   },
-  user: {
+  name: {
+    type: String,
+    required: true
+  },
+  socket: {
     type: String,
     required: true
   }
