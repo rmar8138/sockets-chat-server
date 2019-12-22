@@ -10,11 +10,11 @@ io.on("connection", socket => {
 
   // receive message and save to db
   socket.on("sendMessage", async data => {
-    const { body } = data;
+    const { body, name } = data;
     const newMessage = await MessageModel.create({
       body,
-      socket: socket.id,
-      name: "test"
+      name,
+      socket: socket.id
     });
 
     io.emit("renderMessage", newMessage);
