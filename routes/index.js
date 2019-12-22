@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const MessageModel = require("../database/models/MessageModel");
 const router = express.Router();
 
 // enable cors
@@ -12,7 +13,11 @@ router.use((req, res, next) => {
   next();
 });
 
-router.get("/", (req, res) => res.send("Hello World!"));
+router.get("/", cors(), async (req, res) => {
+  // send back all messages
+  const messages = await MessageModel.find();
+  res.json(messages);
+});
 router.get("/goodbye", (req, res) => res.send("Goodbye World!"));
 
 module.exports = router;
