@@ -1,6 +1,13 @@
 const MessageModel = require("../database/models/MessageModel");
 
 const socketInit = (io, socket) => {
+  let room = null;
+
+  socket.on("joinRoom", data => {
+    room = data;
+    socket.join(room);
+  });
+
   // receive message and save to db
   socket.on("sendMessage", async data => {
     const { body, name, room } = data;
@@ -11,7 +18,7 @@ const socketInit = (io, socket) => {
       socket: socket.id
     });
 
-    io.emit("renderMessage", newMessage);
+    io.to(room).emit("renderMessage", newMessage);
   });
 
   socket.on("disconnect", () => {
