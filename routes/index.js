@@ -13,11 +13,12 @@ router.use((req, res, next) => {
   next();
 });
 
-router.get("/", cors(), async (req, res) => {
-  // send back all messages
+router.get("/room/:roomName", cors(), async (req, res) => {
+  const { roomName } = req.params;
+
+  // send back all messages belonging to room
   const messages = await MessageModel.find();
   res.json(messages);
 });
-router.get("/goodbye", (req, res) => res.send("Goodbye World!"));
 
 module.exports = router;

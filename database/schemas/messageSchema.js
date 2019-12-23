@@ -14,6 +14,10 @@ const MessageSchema = new Schema({
   socket: {
     type: String,
     required: true
+  },
+  room: {
+    type: String,
+    required: true
   }
 });
 
